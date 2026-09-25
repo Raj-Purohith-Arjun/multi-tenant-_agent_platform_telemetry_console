@@ -1,7 +1,9 @@
 import os
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI
+from fastapi.responses import JSONResponse
 from redis.asyncio import Redis, from_url
+from redis.exceptions import RedisError
 
 from contracts import HealthzResponse
 
@@ -20,7 +22,14 @@ async def get_redis() -> Redis:
 
 
 @app.get("/healthz", response_model=HealthzResponse)
-async def healthz(redis: Redis = Depends(get_redis)) -> HealthzResponse:
-    if not await redis.ping():
-        raise HTTPException(status_code=503, detail="redis unavailable")
-    return HealthzResponse(status="ok", redis="ok")
+async def healthz(redis: Redis = Depends(get_redis)) -> HealthzResponse | JSONResponse:
+    try:
+        if await redis.ping():
+            return HealthzResponse(status="ok", redis="ok")
+    except RedisError:
+        pass
+
+    return JSONResponse(
+        status_code=503,
+        content=HealthzResponse(status="down", redis="down").model_dump(),
+    )
