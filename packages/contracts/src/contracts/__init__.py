@@ -1,2 +1,3 @@
-def hello() -> str:
-    return "Hello from contracts!"
+from contracts.health import HealthzResponse
+
+__all__ = ["HealthzResponse"]

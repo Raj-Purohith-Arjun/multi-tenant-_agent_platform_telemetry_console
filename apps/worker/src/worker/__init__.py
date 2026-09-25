@@ -1,2 +1,3 @@
-def main() -> None:
-    print("Hello from worker!")
+from worker.main import main
+
+__all__ = ["main"]
