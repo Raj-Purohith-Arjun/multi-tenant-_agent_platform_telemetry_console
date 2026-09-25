@@ -1,0 +1,19 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "redis": {
+      "title": "Redis",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "redis"
+  ],
+  "title": "HealthzResponse",
+  "type": "object"
+}

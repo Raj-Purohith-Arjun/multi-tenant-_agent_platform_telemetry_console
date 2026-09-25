@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "payload": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Payload",
+      "type": "object"
+    },
+    "run_id": {
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "seq": {
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "tenant_id": {
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "ts": {
+      "format": "date-time",
+      "title": "Ts",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "run.queued",
+        "run.started",
+        "step.started",
+        "llm.request",
+        "llm.response",
+        "tool.call",
+        "tool.result",
+        "tool.error",
+        "checkpoint.saved",
+        "run.halted",
+        "run.completed",
+        "run.failed",
+        "run.cancelled"
+      ],
+      "title": "Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "seq",
+    "run_id",
+    "tenant_id",
+    "type"
+  ],
+  "title": "Event",
+  "type": "object"
+}

@@ -1,0 +1,12 @@
+{
+  "enum": [
+    "queued",
+    "running",
+    "succeeded",
+    "failed",
+    "halted",
+    "cancelled"
+  ],
+  "title": "RunStatus",
+  "type": "string"
+}

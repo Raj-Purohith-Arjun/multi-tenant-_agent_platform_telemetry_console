@@ -1,0 +1,37 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "loop_repeat_threshold": {
+      "default": 3,
+      "minimum": 2,
+      "title": "Loop Repeat Threshold",
+      "type": "integer"
+    },
+    "loop_window": {
+      "default": 6,
+      "exclusiveMinimum": 0,
+      "title": "Loop Window",
+      "type": "integer"
+    },
+    "max_steps": {
+      "default": 20,
+      "exclusiveMinimum": 0,
+      "title": "Max Steps",
+      "type": "integer"
+    },
+    "max_tokens": {
+      "default": 50000,
+      "exclusiveMinimum": 0,
+      "title": "Max Tokens",
+      "type": "integer"
+    },
+    "max_wall_clock_s": {
+      "default": 120,
+      "exclusiveMinimum": 0,
+      "title": "Max Wall Clock S",
+      "type": "integer"
+    }
+  },
+  "title": "RunConfig",
+  "type": "object"
+}

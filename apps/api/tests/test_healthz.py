@@ -1,7 +1,8 @@
-import pytest
-from httpx import ASGITransport, AsyncClient
+from collections.abc import AsyncGenerator
 
+import pytest
 from api.app import app, get_redis
+from httpx import ASGITransport, AsyncClient
 
 
 class RedisStub:
@@ -19,7 +20,7 @@ class RedisStub:
 
 @pytest.mark.asyncio
 async def test_healthz_returns_ok_when_redis_ping_succeeds() -> None:
-    async def override_redis() -> RedisStub:
+    async def override_redis() -> AsyncGenerator[RedisStub, None]:
         yield RedisStub(ping_result=True)
 
     app.dependency_overrides[get_redis] = override_redis
@@ -37,7 +38,7 @@ async def test_healthz_returns_ok_when_redis_ping_succeeds() -> None:
 
 @pytest.mark.asyncio
 async def test_healthz_returns_503_when_redis_ping_fails() -> None:
-    async def override_redis() -> RedisStub:
+    async def override_redis() -> AsyncGenerator[RedisStub, None]:
         yield RedisStub(ping_result=False)
 
     app.dependency_overrides[get_redis] = override_redis
@@ -55,7 +56,7 @@ async def test_healthz_returns_503_when_redis_ping_fails() -> None:
 
 @pytest.mark.asyncio
 async def test_healthz_returns_503_when_redis_ping_raises_runtime_error() -> None:
-    async def override_redis() -> RedisStub:
+    async def override_redis() -> AsyncGenerator[RedisStub, None]:
         yield RedisStub(ping_exception=RuntimeError("redis unavailable"))
 
     app.dependency_overrides[get_redis] = override_redis

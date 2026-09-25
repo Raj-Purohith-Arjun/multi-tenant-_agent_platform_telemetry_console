@@ -1,0 +1,51 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "call_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Call Id",
+      "type": "string"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "ok": {
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "output": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output"
+    }
+  },
+  "required": [
+    "call_id",
+    "ok"
+  ],
+  "title": "ToolResult",
+  "type": "object"
+}
