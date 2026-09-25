@@ -1,0 +1,10 @@
+.git
+.env
+.env.*
+.venv
+**/.venv
+**/node_modules
+**/.next
+**/__pycache__
+.vscode
+apps/web
