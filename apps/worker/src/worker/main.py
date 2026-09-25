@@ -23,7 +23,8 @@ def log_event(message: str, run_id: str, tenant_id: str) -> None:
                 "run_id": run_id,
                 "tenant_id": tenant_id,
             }
-        )
+        ),
+        flush=True,
     )
 
 
