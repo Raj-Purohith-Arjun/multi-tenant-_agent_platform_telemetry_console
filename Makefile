@@ -10,7 +10,7 @@ logs:
 	docker compose logs -f
 
 test:
-	~/.local/bin/uv run --package api pytest apps/api/tests -q
+	uv run --package api pytest apps/api/tests -q
 
 fmt:
-	~/.local/bin/uv run ruff format apps packages
+	uv run ruff format apps packages

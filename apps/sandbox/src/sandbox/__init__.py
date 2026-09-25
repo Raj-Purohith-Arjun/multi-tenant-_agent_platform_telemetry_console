@@ -4,4 +4,4 @@ def main() -> None:
     Future execution must run untrusted code in isolated Docker containers.
     """
 
-    return None
+    return
