@@ -4,3 +4,4 @@ __pycache__/
 .env
 apps/web/node_modules/
 apps/web/.next/
+.pnpm-store/

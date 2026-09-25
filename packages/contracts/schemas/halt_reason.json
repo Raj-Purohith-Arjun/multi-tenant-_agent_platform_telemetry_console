@@ -1,0 +1,12 @@
+{
+  "enum": [
+    "max_steps",
+    "max_wall_clock",
+    "max_tokens",
+    "loop_detected",
+    "cancelled",
+    "error"
+  ],
+  "title": "HaltReason",
+  "type": "string"
+}

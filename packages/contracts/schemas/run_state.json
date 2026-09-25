@@ -1,0 +1,130 @@
+{
+  "$defs": {
+    "HaltReason": {
+      "enum": [
+        "max_steps",
+        "max_wall_clock",
+        "max_tokens",
+        "loop_detected",
+        "cancelled",
+        "error"
+      ],
+      "title": "HaltReason",
+      "type": "string"
+    },
+    "RunConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "loop_repeat_threshold": {
+          "default": 3,
+          "minimum": 2,
+          "title": "Loop Repeat Threshold",
+          "type": "integer"
+        },
+        "loop_window": {
+          "default": 6,
+          "exclusiveMinimum": 0,
+          "title": "Loop Window",
+          "type": "integer"
+        },
+        "max_steps": {
+          "default": 20,
+          "exclusiveMinimum": 0,
+          "title": "Max Steps",
+          "type": "integer"
+        },
+        "max_tokens": {
+          "default": 50000,
+          "exclusiveMinimum": 0,
+          "title": "Max Tokens",
+          "type": "integer"
+        },
+        "max_wall_clock_s": {
+          "default": 120,
+          "exclusiveMinimum": 0,
+          "title": "Max Wall Clock S",
+          "type": "integer"
+        }
+      },
+      "title": "RunConfig",
+      "type": "object"
+    },
+    "RunStatus": {
+      "enum": [
+        "queued",
+        "running",
+        "succeeded",
+        "failed",
+        "halted",
+        "cancelled"
+      ],
+      "title": "RunStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "config": {
+      "$ref": "#/$defs/RunConfig"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "halt_reason": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HaltReason"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "run_id": {
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/RunStatus",
+      "default": "queued"
+    },
+    "step": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Step",
+      "type": "integer"
+    },
+    "tenant_id": {
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "tokens_used": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Tokens Used",
+      "type": "integer"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "version": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "run_id",
+    "tenant_id"
+  ],
+  "title": "RunState",
+  "type": "object"
+}
